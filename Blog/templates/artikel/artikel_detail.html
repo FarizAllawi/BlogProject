@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{ artikel.judul }}
+{% endblock title%}
+
+{% block contents %}
+  <h1>{{ artikel.judul }}</h1>
+  <p>Kategori : {{ artikel.kategori }} | {{ artikel.published }}</p>
+  <p>{{ artikel.isi }}</p>
+{% endblock contents%}

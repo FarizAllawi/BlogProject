@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 
-class Artikel(models.Model):
+class ArtikelModel(models.Model):
     judul           = models.CharField(max_length=100)
     isi             = models.TextField()
     kategori        = models.CharField(max_length=255)
@@ -13,5 +13,5 @@ class Artikel(models.Model):
         self.slug = slugify(self.judul)
         return super().save(**kwargs)
 
-    def __str__():
+    def __str__(self):
         return "{} - {}".format(self.id, self.judul)
