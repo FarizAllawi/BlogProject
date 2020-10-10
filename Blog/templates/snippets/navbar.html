@@ -22,8 +22,8 @@
             User
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Tambah Artikel</a>
-            <a class="dropdown-item" href="#">Manage Artikel</a>
+            <a class="dropdown-item" href="{% url 'artikel:create' %}">Tambah Artikel</a>
+            <a class="dropdown-item" href="{% url 'artikel:manage' 1 %}">Manage Artikel</a>
           </div>
         </li>
       </div>

@@ -1,6 +1,39 @@
-from django.shortcuts import render
-from django.views.generic import ListView , DetailView
+from django.shortcuts import redirect
+from django.urls import reverse_lazy, reverse
 from .models import ArtikelModel
+from .forms import ArtikelForm
+from django.views.generic import (
+    ListView ,
+    DetailView,
+    CreateView,
+    UpdateView ,
+    DeleteView
+)
+
+class ArtikelDeleteView(DeleteView):
+    model               = ArtikelModel
+    template_name       = "artikel/artikel_delete_confirmation.html"
+    success_url         = reverse_lazy('artikel:manage', kwargs={'page' : 1})
+    context_object_name = 'artikel'
+
+
+class ArtikelUpdateView(UpdateView):
+    form_class          = ArtikelForm
+    model               = ArtikelModel
+    template_name       = "artikel/artikel_update.html"
+
+class ArtikelManageView(ListView):
+    model               = ArtikelModel
+    template_name       = "artikel/artikel_manage.html"
+    context_object_name = 'artikel_list'
+    ordering            = ['published']
+    paginate_by         = 5
+
+
+class ArtikelCreateView(CreateView):
+    form_class          = ArtikelForm
+    template_name       =   "artikel/artikel_create.html"
+
 
 class ArtikelPerKategori():
     model               = ArtikelModel
@@ -13,8 +46,6 @@ class ArtikelPerKategori():
             artikel     = self.model.objects.filter(kategori=kategori).latest('published')
             queryset.append(artikel)
         return queryset
-
-       
 
 class ArtikelListView(ListView):
     model               = ArtikelModel

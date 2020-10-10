@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+{% endblock title %}
+
+{% block contents %}
+  <h1>Tambah Artikel</h1>
+
+  <form  method="post">
+    {% csrf_token %}
+    {% for form in form %}
+      <div class="form-group">
+         {{ form.label }}
+         {{ form }}
+      </div>
+    {% endfor %}
+
+    <button class="btn btn-primary" type="submit">update</button>
+  </form>
+{% endblock contents %}
