@@ -2,6 +2,20 @@ from django.shortcuts import render
 from django.views.generic import ListView , DetailView
 from .models import ArtikelModel
 
+class ArtikelPerKategori():
+    model               = ArtikelModel
+
+    def get_latest_artikel(self):
+        kategori_list   = self.model.objects.values_list('kategori', flat=True).distinct()
+        queryset        = []
+
+        for kategori in kategori_list:
+            artikel     = self.model.objects.filter(kategori=kategori).latest('published')
+            queryset.append(artikel)
+        return queryset
+
+       
+
 class ArtikelListView(ListView):
     model               = ArtikelModel
     template_name       = "artikel/artikel_list.html"
